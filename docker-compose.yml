@@ -9,11 +9,12 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./certs:/etc/nginx/certs
+      - ./certs:/etc/nginx/certs:ro
+      - ./config/nginx-custom-config.conf:/etc/nginx/conf.d/custom-config.conf:ro
   whoami:
     image: jwilder/whoami
     environment:
-      - VIRTUAL_HOST=whoami.localhost
+      - VIRTUAL_HOST=whoami.docker
   mailhog:
      image: mailhog/mailhog
      restart: always
